@@ -1,0 +1,49 @@
+function materialdef(mws, Name, Epsilon, TanD)
+%define a new material
+%cst = actxserver('CSTStudio.application');%首先载入CST应用控件
+%mws = invoke(cst, 'NewMWS');%新建一个MWS项目
+%app = invoke(mws, 'GetApplicationName');%获取当前应用名称
+%ver = invoke(mws, 'GetApplicationVersion');%获取当前应用版本号
+%Epsilon=2.65;
+%TanD=0.0015;
+%Name='material1';
+Str_Name=Name;
+sCommand = '';
+sCommand = [sCommand 'With Material'];
+sCommand = [sCommand 10 '.Reset'];
+sCommand = [sCommand 10 '.Name "',Str_Name, '"'];
+sCommand = [sCommand 10 '.Folder ""' 10 '.Rho "0.0"' 10 '.ThermalType "Normal"' 10 '.ThermalConductivity "0"'];
+sCommand = [sCommand 10 '.SpecificHeat "0", "J/K/kg"' 10 '.DynamicViscosity "0"' 10 '.Emissivity "0"'];
+sCommand = [sCommand 10 '.MetabolicRate "0.0"' 10 '.VoxelConvection "0.0"' 10 '.BloodFlow "0"'];
+sCommand = [sCommand 10 '.MechanicsType "Unused"' 10 '.FrqType "all"' 10 '.Type "Normal"'];
+sCommand = [sCommand 10 '.MaterialUnit "Frequency", "GHz"' 10 '.MaterialUnit "Geometry", "mm"'];
+sCommand = [sCommand 10 '.MaterialUnit "Time", "ns"' 10 '.MaterialUnit "Temperature", "Kelvin"'];
+sCommand = [sCommand 10 '.Epsilon "',num2str(Epsilon,'%.3f'),'"'];
+sCommand = [sCommand 10 '.Mu "1"' 10 '.Sigma "0"' 10 '.TanD "',num2str(TanD,'%.5f'),'"'];
+sCommand = [sCommand 10 '.TanDFreq "0.0"' 10 '.TanDGiven "True"' 10 '.TanDModel "ConstTanD"'];
+sCommand = [sCommand 10 '.EnableUserConstTanDModelOrderEps "False"' 10 '.ConstTanDModelOrderEps "1"'];
+sCommand = [sCommand 10 '.SetElParametricConductivity "False"' 10 '.ReferenceCoordSystem "Global"'];
+sCommand = [sCommand 10 '.CoordSystemType "Cartesian"' 10 '.SigmaM "0"' 10 '.TanDM "0.0"' 10 '.TanDMFreq "0.0"'];
+sCommand = [sCommand 10 '.TanDMGiven "False"' 10 '.TanDMModel "ConstTanD"'];
+sCommand = [sCommand 10 '.EnableUserConstTanDModelOrderMu "False"' 10 '.ConstTanDModelOrderMu "1"'];
+sCommand = [sCommand 10 '.SetMagParametricConductivity "False"' 10 '.DispModelEps "None"'];
+sCommand = [sCommand 10 '.DispModelMu "None"' 10 '.DispersiveFittingSchemeEps "Nth Order"'];
+sCommand = [sCommand 10 '.MaximalOrderNthModelFitEps "10"' 10 '.ErrorLimitNthModelFitEps "0.1"'];
+sCommand = [sCommand 10 '.UseOnlyDataInSimFreqRangeNthModelEps "False"' 10 '.DispersiveFittingSchemeMu "Nth Order"'];
+sCommand = [sCommand 10 '.MaximalOrderNthModelFitMu "10"' 10 '.ErrorLimitNthModelFitMu "0.1"'];
+sCommand = [sCommand 10 '.UseOnlyDataInSimFreqRangeNthModelMu "False"' 10 '.UseGeneralDispersionEps "False"'];
+sCommand = [sCommand 10 '.UseGeneralDispersionMu "False"' 10 '.NLAnisotropy "False"'];
+sCommand = [sCommand 10 '.NLAStackingFactor "1"'];
+sCommand = [sCommand 10 '.NLADirectionX "1"'];
+sCommand = [sCommand 10 '.NLADirectionY "0"'];
+sCommand = [sCommand 10 '.NLADirectionZ "0"'];
+sCommand = [sCommand 10 '.Colour "0", "1", "1" '];
+sCommand = [sCommand 10 '.Wireframe "False" '];
+sCommand = [sCommand 10 '.Reflection "False"'];
+sCommand = [sCommand 10 '.Allowoutline "True" '];
+sCommand = [sCommand 10 '.Transparentoutline "False"'];
+sCommand = [sCommand 10 '.Transparency "0"'];
+sCommand = [sCommand 10 '.Create'];
+sCommand = [sCommand 10 'End With'];
+invoke(mws, 'AddToHistory',['define material:',Str_Name], sCommand);
+end
